@@ -3,6 +3,7 @@ package com.task04;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.syndicate.deployment.annotations.events.SqsTriggerEventSource;
 import com.syndicate.deployment.annotations.lambda.LambdaHandler;
 import com.syndicate.deployment.annotations.resources.DependsOn;
@@ -20,12 +21,14 @@ import java.util.Map;
 )
 @DependsOn(resourceType = ResourceType.SQS_QUEUE,
         name = "async_queue")
-public class SqsHandler implements RequestHandler<Object, Map<String, Object>> {
+public class SqsHandler implements RequestHandler<SQSEvent, Map<String, Object>> {
 
-    public Map<String, Object> handleRequest(Object request, Context context) {
+    public Map<String, Object> handleRequest(SQSEvent request, Context context) {
         LambdaLogger logger = context.getLogger();
-        logger.log("Test log from SqsHandler lambda");
-        System.out.println("Hello from lambda");
+        SQSEvent.SQSMessage message = request.getRecords().get(0);
+
+        logger.log(message.getBody());
+
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("statusCode", 200);
         resultMap.put("body", "Hello from Lambda");

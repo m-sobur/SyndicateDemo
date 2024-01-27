@@ -10,3 +10,5 @@ I
 deployment_resources.json,8\1\816544df849ba10d2d8c8afba56a9ae2452fb9e5
 Y
 )jsrc/main/java/com/task04/SnsHandler.java,d\5\d5d1d8e8ef2e2de9a7e032e5592589844617731f
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
