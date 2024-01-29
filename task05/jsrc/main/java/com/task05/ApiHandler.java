@@ -45,10 +45,11 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
         Event event = new Event(eventRequestFromAPIGateway.getPrincipalId(), eventRequestFromAPIGateway.getContent());
 
         System.out.println(event);
+
         try {
             Map<String, AttributeValue> item = new HashMap<>();
             item.put("id", new AttributeValue().withS(event.getId().toString()));
-            item.put("principalId", new AttributeValue().withN(event.getPrincipalId().toString()));
+            item.put("principalId", new AttributeValue().withN(String.valueOf(event.getPrincipalId())));
             item.put("createdAt", new AttributeValue().withS(event.getCreatedAt()));
             item.put("body", new AttributeValue().withS(gson.toJson(event.getBody())));
 

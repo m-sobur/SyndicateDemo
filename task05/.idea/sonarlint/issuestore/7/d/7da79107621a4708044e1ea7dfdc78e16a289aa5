@@ -1,5 +1,5 @@
 
-G	java:S106&"+Replace this use of System.out by a logger.(ÑŞ‡8ª£‚¶Õ1
+G	java:S106&"+Replace this use of System.out by a logger.(ÑŞ‡8ğÚÿ¶Õ1
 N
-java:S6262*",Give the enum value for this region instead.(Üÿğ˜ûÿÿÿÿ8«£‚¶Õ1
-L	java:S106/"+Replace this use of System.out by a logger.(‹½˜‘úÿÿÿÿ8«£‚¶Õ1
+java:S6262*",Give the enum value for this region instead.(Üÿğ˜ûÿÿÿÿ8ğÚÿ¶Õ1
+L	java:S106/"+Replace this use of System.out by a logger.(‹½˜‘úÿÿÿÿ8ğÚÿ¶Õ1

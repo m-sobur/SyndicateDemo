@@ -7,11 +7,11 @@ import java.util.UUID;
 
 public class Event {
     private UUID id;
-    private Integer principalId;
+    private int principalId;
     private String createdAt;
     private Map<String, String> body;
 
-    public Event(Integer principalId, Map<String, String> body) {
+    public Event(int principalId, Map<String, String> body) {
         this.id = UUID.randomUUID();
         this.createdAt = ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT);
         this.principalId = principalId;
@@ -26,11 +26,11 @@ public class Event {
         this.id = id;
     }
 
-    public Integer getPrincipalId() {
+    public int getPrincipalId() {
         return principalId;
     }
 
-    public void setPrincipalId(Integer principalId) {
+    public void setPrincipalId(int principalId) {
         this.principalId = principalId;
     }
 
