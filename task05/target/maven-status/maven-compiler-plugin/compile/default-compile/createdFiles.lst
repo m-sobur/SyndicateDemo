@@ -1,0 +1,4 @@
+com\task05\model\Event.class
+com\task05\ApiHandler.class
+com\task05\model\EventDTO.class
+com\task05\model\EventRequestFromAPIGateway.class
