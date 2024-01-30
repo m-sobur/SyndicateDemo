@@ -51,7 +51,12 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
             item.put("id", new AttributeValue().withS(event.getId().toString()));
             item.put("principalId", new AttributeValue().withN(String.valueOf(event.getPrincipalId())));
             item.put("createdAt", new AttributeValue().withS(event.getCreatedAt()));
-            item.put("body", new AttributeValue().withS(gson.toJson(event.getBody())));
+
+            Map<String, AttributeValue> bodyMap = new HashMap<>();
+            for (Map.Entry<String, String> entry : event.getBody().entrySet()) {
+                bodyMap.put(entry.getKey(), new AttributeValue().withS(entry.getValue()));
+            }
+            item.put("body", new AttributeValue().withM(bodyMap));
 
             PutItemRequest requestToDB = new PutItemRequest()
                     .withTableName("cmtr-048d7043-Events-test")
