@@ -39,28 +39,29 @@ public class AuditProducer implements RequestHandler<DynamodbEvent, Void> {
 
 	public Void handleRequest(DynamodbEvent dynamodbEvent, Context context) {
 		System.out.println("Entry of handleRequest method");
-
 		for (DynamodbEvent.DynamodbStreamRecord record : dynamodbEvent.getRecords()) {
-
-
-			Configuration configuration = new Configuration(record.getDynamodb().getNewImage().get("key").getS(),
-					record.getDynamodb().getNewImage().get("value").getS());
+			Configuration configuration = new Configuration(
+					record.getDynamodb().getNewImage().get("key").getS(),
+					record.getDynamodb().getNewImage().get("value").getS()
+			);
 
 			if (record.getEventName().equals("INSERT")) {
 				System.out.println("INSERT");
 
-				NewRecord newRecord = new NewRecord(configuration.getKey(),configuration);
+				NewRecord newRecord = new NewRecord(
+						configuration.getKey(),configuration
+				);
 				publishAudit(newRecord);
 			} else if (record.getEventName().equals("MODIFY")) {
 				System.out.println("MODIFY");
 
-				UpdateRecord updateAudit = new UpdateRecord(
+				UpdateRecord updateRecord = new UpdateRecord(
 						configuration.getKey(),
 						"value",
 						record.getDynamodb().getOldImage().get("value").getS(),
 						record.getDynamodb().getNewImage().get("value").getS()
 				);
-				publishAudit(updateAudit);
+				publishAudit(updateRecord);
 			}
 		}
 		return null;
