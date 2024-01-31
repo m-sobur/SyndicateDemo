@@ -1,0 +1,16 @@
+
+h
+java:S1192/"FDefine a constant instead of duplicating this literal "value" 5 times.(¨Íßÿÿÿÿÿ8×çÈùÕ1
+^
+java:S1710"<Remove the 'Dependencies' wrapper from this annotation group(‡µ¯êøÿÿÿÿ8ÙçÈùÕ1
+N
+java:S6262$",Give the enum value for this region instead.(»Ô¾åûÿÿÿÿ8âçÈùÕ1
+L	java:S106)"+Replace this use of System.out by a logger.(é­çËøÿÿÿÿ8ãçÈùÕ1
+\
+java:S6213+":Rename this variable to not match a restricted identifier.(Õşü¿øÿÿÿÿ8ãçÈùÕ1
+G	java:S1062"+Replace this use of System.out by a logger.(ãôû¾8åçÈùÕ1
+G	java:S1067"+Replace this use of System.out by a logger.(ê’Ÿñ8åçÈùÕ1
+I
+java:S3599J",Use another way to initialize this instance.(¹¤å£8êçÈùÕ1
+v
+java:S1171J"YMove the contents of this initializer to a standard constructor or to field initializers.(¹¤å£8ìçÈùÕ1
