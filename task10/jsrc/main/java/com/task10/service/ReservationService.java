@@ -22,6 +22,7 @@ import java.util.UUID;
 
 public class ReservationService {
     private Regions REGION = Regions.EU_CENTRAL_1;
+    /*TODO change RESERVATION_DB_TABLE_NAME*/
     private final String RESERVATION_DB_TABLE_NAME = "cmtr-048d7043-Reservations-test";
     private AmazonDynamoDB amazonDynamoDB;
     private TableService tableService = new TableService();

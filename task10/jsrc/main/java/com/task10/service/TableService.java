@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class TableService {
     private Regions REGION = Regions.EU_CENTRAL_1;
+    /*TODO change TABLES_DB_TABLE_NAME*/
     private final String TABLES_DB_TABLE_NAME = "cmtr-048d7043-Tables-test";
 
     private AmazonDynamoDB amazonDynamoDB;

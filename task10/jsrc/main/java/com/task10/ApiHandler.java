@@ -219,6 +219,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
     }
 
     private String getPoolId() {
+       /* TODO change userPoolName*/
         String userPoolName = "cmtr-048d7043-simple-booking-userpool-test";
         ListUserPoolsRequest listUserPoolsRequest = ListUserPoolsRequest.builder()
                 .maxResults(10)

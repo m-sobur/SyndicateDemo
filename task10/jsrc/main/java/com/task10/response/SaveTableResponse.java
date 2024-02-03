@@ -1,6 +1,7 @@
 package com.task10.response;
 
 public class SaveTableResponse {
+
     int id;
 
     public SaveTableResponse(int id) {
