@@ -56,10 +56,12 @@ public class TableService {
     }
 
     public SaveTableResponse saveTable(String requestBody) throws IOException {
+        System.out.println("ENTRY OF saveTable method");
+        System.out.println("----requestBody:" + requestBody);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Table table = objectMapper.readValue(requestBody, Table.class);
-        System.out.println("Table:" + table);
+        System.out.println("----Table:" + table);
         Table savedTable = new Table();
         savedTable.setId(table.getId());
         savedTable.setNumber(table.getNumber());
@@ -69,9 +71,10 @@ public class TableService {
         DynamoDBMapper dbMapper = new DynamoDBMapper(getAmazonDynamoDB());
         try {
             dbMapper.save(savedTable);
+            System.out.println("----Success savedTable:" + savedTable);
             return new SaveTableResponse(table.getId());
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("----Exception savedTable:" + e);
             return new SaveTableResponse(1);
         }
     }
