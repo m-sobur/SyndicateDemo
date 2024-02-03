@@ -6,7 +6,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "cmtr-048d7043-Reservations-test")
 public class Reservation {
-
 	private String id;
 	private int tableNumber;
 	private String clientName;
