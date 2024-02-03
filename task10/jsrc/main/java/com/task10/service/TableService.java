@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class TableService {
-
     private Regions REGION = Regions.EU_CENTRAL_1;
     private final String TABLES_DB_TABLE_NAME = "cmtr-048d7043-Tables-test";
 
@@ -52,16 +51,13 @@ public class TableService {
             getTablesResponse.getTables().add(table);
         }
         return getTablesResponse;
-
     }
 
     public SaveTableResponse saveTable(String requestBody) throws IOException {
-        System.out.println("ENTRY OF saveTable method");
-        System.out.println("----requestBody:" + requestBody);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Table table = objectMapper.readValue(requestBody, Table.class);
-        System.out.println("----Table:" + table);
+        System.out.println("Table:" + table);
         Table savedTable = new Table();
         savedTable.setId(table.getId());
         savedTable.setNumber(table.getNumber());
@@ -71,10 +67,8 @@ public class TableService {
         DynamoDBMapper dbMapper = new DynamoDBMapper(getAmazonDynamoDB());
         try {
             dbMapper.save(savedTable);
-            System.out.println("----Success savedTable:" + savedTable);
             return new SaveTableResponse(table.getId());
         } catch (Exception e) {
-            System.out.println("----Exception savedTable:" + e);
             return new SaveTableResponse(1);
         }
     }

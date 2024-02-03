@@ -31,6 +31,7 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoo
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoolsResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.UserPoolDescriptionType;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,6 @@ import java.util.Map;
         roleName = "api_handler-role"
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, Object> {
-
     private CognitoIdentityProviderClient identityProviderClient;
     private TableService tableService = new TableService();
     private ReservationService reservationService = new ReservationService();
@@ -78,12 +78,11 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
                 break;
             case "/reservations":
                 if (httpMethod.equals("GET")) {
-                    responseEvent = getReservations(request);
+                    responseEvent = getReservations();
                 }
                 if (httpMethod.equals("POST")) {
                     responseEvent = saveReservations(request);
                 }
-
         }
         return responseEvent;
     }
@@ -98,7 +97,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
         }
     }
 
-    private APIGatewayProxyResponseEvent getReservations(APIGatewayProxyRequestEvent request) {
+    private APIGatewayProxyResponseEvent getReservations() {
         Gson gson = new Gson();
         GetReservationsResponse response = reservationService.getReservations();
         return ResponseHandler.successResponse(gson.toJson(response));
@@ -107,7 +106,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
     private APIGatewayProxyResponseEvent getTablesById(int id) {
         Gson gson = new Gson();
         try {
-            System.out.println("Get table by id....");
+            System.out.println("Get table by id...." + id);
             Table response = tableService.getTableById(id);
             System.out.println("Get table by id response: " + response);
             System.out.println("Geted table by id.");
@@ -155,12 +154,10 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
                     .authFlow(AuthFlowType.ADMIN_USER_PASSWORD_AUTH)
                     .build();
 
-
             AdminInitiateAuthResponse response = getCognitoIdentityProviderClient().adminInitiateAuth(authRequest);
             String accessToken = response.authenticationResult().idToken();
             JSONObject responseBody = new JSONObject();
             responseBody.put("accessToken", accessToken);
-
 
             return response.sdkHttpResponse().isSuccessful() ?
                     new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(responseBody.toJSONString()) :
@@ -169,7 +166,6 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
             return ResponseHandler.errorResponse("User signIn failed " + exc);
         }
     }
-
 
     private APIGatewayProxyResponseEvent signUp(APIGatewayProxyRequestEvent request) {
         JSONParser parser = new JSONParser();
@@ -193,8 +189,9 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
         }
     }
 
-
     private AdminConfirmSignUpResponse registerUserInCognito(String email, String password, String firstName, String lastName) {
+        /*TODO In this case, you cannot use a single AttributeType instance to set multiple attributes.
+          TODO Instead, you need to create a separate AttributeType for each attribute.*/
         AttributeType userAttrs = AttributeType.builder()
                 .name("name").value(firstName + " " + lastName)
                 .name("email").value(email)
@@ -242,5 +239,4 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
         }
         return identityProviderClient;
     }
-
 }
