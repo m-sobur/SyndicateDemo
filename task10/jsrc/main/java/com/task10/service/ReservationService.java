@@ -38,10 +38,11 @@ public class ReservationService {
     }
 
     public SaveReservationResponse saveReservation(String requestBody) throws IOException {
+        System.out.println("ENTRY of the saveReservation method: " + requestBody);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Reservation reservation = objectMapper.readValue(requestBody, Reservation.class);
-        System.out.println("Save reservation: " + reservation);
+        System.out.println("------Save reservation: " + reservation);
         GetTablesResponse getTablesResponse = tableService.getTables(); // assuming tableService.getTables() returns a list of all tables
         Table table = getTablesResponse.getTables().stream()
                 .filter(t -> t.getNumber() == reservation.getTableNumber())
@@ -59,6 +60,7 @@ public class ReservationService {
         }
         reservation.setId(UUID.randomUUID().toString());
         DynamoDBMapper dynamoDBMapper = new DynamoDBMapper(getAmazonDynamoDB());
+        System.out.println("------Save reservation: " + reservation);
         dynamoDBMapper.save(reservation);
 
         return new SaveReservationResponse(reservation.getId());
