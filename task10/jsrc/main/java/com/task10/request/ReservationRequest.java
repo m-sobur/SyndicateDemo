@@ -12,7 +12,7 @@ public class ReservationRequest {
 	}
 
 	public ReservationRequest(Integer tableNumber, String clientName, String phoneNumber, String date,
-			String slotTimeStart, String slotTimeEnd) {
+							  String slotTimeStart, String slotTimeEnd) {
 		this.tableNumber = tableNumber;
 		this.clientName = clientName;
 		this.phoneNumber = phoneNumber;

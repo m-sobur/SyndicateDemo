@@ -1,19 +1,17 @@
 package com.task10.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "cmtr-048d7043-Tables-test")
 public class Table {
-	@DynamoDBHashKey(attributeName = "id")
+
 	private Integer id;
 	private Integer number;
 	private Integer places;
-	private Boolean isVip;
+	private boolean isVip;
 	private Integer minOrder;
-
-	public Table() {
-	}
 
 	public Table(Integer id, Integer number, Integer places, Boolean isVip, Integer minOrder) {
 		this.id = id;
@@ -23,6 +21,10 @@ public class Table {
 		this.minOrder = minOrder;
 	}
 
+	public Table() {
+	}
+
+	@DynamoDBHashKey(attributeName = "id")
 	public Integer getId() {
 		return id;
 	}
@@ -31,6 +33,7 @@ public class Table {
 		this.id = id;
 	}
 
+	@DynamoDBAttribute(attributeName = "number")
 	public Integer getNumber() {
 		return number;
 	}
@@ -39,6 +42,7 @@ public class Table {
 		this.number = number;
 	}
 
+	@DynamoDBAttribute(attributeName = "places")
 	public Integer getPlaces() {
 		return places;
 	}
@@ -47,7 +51,8 @@ public class Table {
 		this.places = places;
 	}
 
-	public Boolean getVip() {
+	@DynamoDBAttribute(attributeName = "isVip")
+	public Boolean isVip() {
 		return isVip;
 	}
 
@@ -55,6 +60,7 @@ public class Table {
 		isVip = vip;
 	}
 
+	@DynamoDBAttribute(attributeName = "minOrder")
 	public Integer getMinOrder() {
 		return minOrder;
 	}
@@ -62,4 +68,16 @@ public class Table {
 	public void setMinOrder(Integer minOrder) {
 		this.minOrder = minOrder;
 	}
+
+	@Override
+	public String toString() {
+		return "Table{" +
+				"id=" + id +
+				", number=" + number +
+				", places=" + places +
+				", isVip=" + isVip +
+				", minOrder=" + minOrder +
+				'}';
+	}
+
 }

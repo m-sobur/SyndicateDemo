@@ -1,24 +1,22 @@
 package com.task10.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "cmtr-048d7043-Reservations-test")
 public class Reservation {
-	@DynamoDBHashKey(attributeName = "id")
+
 	private String id;
-	private Integer tableNumber;
+	private int tableNumber;
 	private String clientName;
 	private String phoneNumber;
 	private String date;
 	private String slotTimeStart;
 	private String slotTimeEnd;
 
-	public Reservation() {
-	}
-
-	public Reservation(String id, Integer tableNumber, String clientName, String phoneNumber, String date,
-			String slotTimeStart, String slotTimeEnd) {
+	public Reservation(String id, int tableNumber, String clientName, String phoneNumber, String date,
+					   String slotTimeStart, String slotTimeEnd) {
 		this.id = id;
 		this.tableNumber = tableNumber;
 		this.clientName = clientName;
@@ -28,6 +26,10 @@ public class Reservation {
 		this.slotTimeEnd = slotTimeEnd;
 	}
 
+	public Reservation() {
+	}
+
+	@DynamoDBHashKey(attributeName = "id")
 	public String getId() {
 		return id;
 	}
@@ -36,14 +38,16 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public Integer getTableNumber() {
+	@DynamoDBAttribute(attributeName = "tableNumber")
+	public int getTableNumber() {
 		return tableNumber;
 	}
 
-	public void setTableNumber(Integer tableNumber) {
+	public void setTableNumber(int tableNumber) {
 		this.tableNumber = tableNumber;
 	}
 
+	@DynamoDBAttribute(attributeName = "clientName")
 	public String getClientName() {
 		return clientName;
 	}
@@ -52,6 +56,7 @@ public class Reservation {
 		this.clientName = clientName;
 	}
 
+	@DynamoDBAttribute(attributeName = "phoneNumber")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -60,6 +65,7 @@ public class Reservation {
 		this.phoneNumber = phoneNumber;
 	}
 
+	@DynamoDBAttribute(attributeName = "date")
 	public String getDate() {
 		return date;
 	}
@@ -68,6 +74,7 @@ public class Reservation {
 		this.date = date;
 	}
 
+	@DynamoDBAttribute(attributeName = "slotTimeStart")
 	public String getSlotTimeStart() {
 		return slotTimeStart;
 	}
@@ -76,6 +83,7 @@ public class Reservation {
 		this.slotTimeStart = slotTimeStart;
 	}
 
+	@DynamoDBAttribute(attributeName = "slotTimeEnd")
 	public String getSlotTimeEnd() {
 		return slotTimeEnd;
 	}
@@ -83,4 +91,18 @@ public class Reservation {
 	public void setSlotTimeEnd(String slotTimeEnd) {
 		this.slotTimeEnd = slotTimeEnd;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation{" +
+				"id='" + id + '\'' +
+				", tableNumber=" + tableNumber +
+				", clientName='" + clientName + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", date='" + date + '\'' +
+				", slotTimeStart='" + slotTimeStart + '\'' +
+				", slotTimeEnd='" + slotTimeEnd + '\'' +
+				'}';
+	}
+
 }

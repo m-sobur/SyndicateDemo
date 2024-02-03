@@ -1,10 +1,5 @@
 package com.task10.response;
 
-import com.task10.model.Table;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class TableResponse {
 	private Integer id;
 	private Integer number;
@@ -21,16 +16,6 @@ public class TableResponse {
 		this.places = places;
 		this.isVip = isVip;
 		this.minOrder = minOrder;
-	}
-
-	public static List<TableResponse> fromTableModel(List<Table> tables) {
-		return tables.stream()
-				.map(t -> new TableResponse(t.getId(), t.getNumber(), t.getPlaces(), t.getVip(), t.getMinOrder()))
-				.collect(Collectors.toList());
-	}
-
-	public static TableResponse fromTableModel(Table table) {
-		return new TableResponse(table.getId(), table.getNumber(), table.getPlaces(), table.getVip(), table.getMinOrder());
 	}
 
 	public Integer getId() {
