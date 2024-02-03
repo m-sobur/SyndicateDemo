@@ -32,9 +32,7 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUserPoo
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.UserPoolDescriptionType;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @LambdaHandler(lambdaName = "api_handler",
@@ -197,10 +195,10 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, O
 
 
     private AdminConfirmSignUpResponse registerUserInCognito(String email, String password, String firstName, String lastName) {
-        List<AttributeType> userAttrs = Arrays.asList(
-                AttributeType.builder().name("name").value(firstName + " " + lastName).build(),
-                AttributeType.builder().name("email").value(email).build()
-        );
+        AttributeType userAttrs = AttributeType.builder()
+                .name("name").value(firstName + " " + lastName)
+                .name("email").value(email)
+                .build();
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .userAttributes(userAttrs)
                 .username(email)
