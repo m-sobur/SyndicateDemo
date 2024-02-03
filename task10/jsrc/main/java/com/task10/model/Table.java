@@ -6,6 +6,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "cmtr-048d7043-Tables-test")
 public class Table {
+
 	private Integer id;
 	private Integer number;
 	private Integer places;
